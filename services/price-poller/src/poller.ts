@@ -39,7 +39,7 @@ export class PricePoller {
       const data = { time: E, symbol: s, trade_id: t, price: p, quantity: q };
       this.dataArr.push(data);
 
-      publish(CONFIG.redis.pubSubChannel, JSON.stringify(data));
+      publish(CONFIG.redis.pubSubChannel, JSON.stringify({type: "trade", ...data}));
       if (this.dataArr.length >= 500) {
         insertBulkTrade(this.dataArr);
         this.dataArr = [];

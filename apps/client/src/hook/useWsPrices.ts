@@ -1,7 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 
-export const useWsPrices = (symbol: string, onPrice?: (price: number, ts: number) => void) => {
+export const useWsPrices = (
+  symbol: string,
+  onPrice?: (price: number, ts: number) => void
+) => {
   const [tick, setTick] = useState<any | null>(null);
+  const [bidAsk, setBidAsk] = useState<Record<string, any>>({});
   const wsRef = useRef<WebSocket | null>(null);
 
   useEffect(() => {
@@ -15,9 +19,15 @@ export const useWsPrices = (symbol: string, onPrice?: (price: number, ts: number
 
     ws.onmessage = (msg) => {
       const data = JSON.parse(msg.data);
-      if (data.symbol === symbol) {
+      if (data.symbol === symbol && data.type === "trade") {
         setTick(data);
         if (onPrice) onPrice(data.price, data.timestamp);
+      }
+      if (data.type === "bid-ask") {
+        setBidAsk((prev) => ({
+          ...prev,
+          [data.symbol]: data,
+        }));
       }
     };
 
@@ -27,5 +37,5 @@ export const useWsPrices = (symbol: string, onPrice?: (price: number, ts: number
     return () => ws.close();
   }, [symbol]);
 
-  return tick;
+  return { tick, bidAsk };
 };

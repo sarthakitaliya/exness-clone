@@ -12,7 +12,7 @@ const IntervalDropdown = ({
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="bg-gray-800 text-gray-200 px-3 py-2 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+        className="bg-gray-800 text-gray-200 px-3 py-2 rounded-md text-sm focus:outline-none outline focus:ring-2 focus:ring-blue-600"
       >
         {INTERVALS.map((int) => (
           <option key={int} value={int}>

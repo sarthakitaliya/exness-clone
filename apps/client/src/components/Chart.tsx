@@ -10,10 +10,10 @@ import type { CandlestickData, UTCTimestamp } from "lightweight-charts";
 import { useCandleData } from "@/hook/useCandleData";
 import { useWsPrices } from "@/hook/useWsPrices";
 
-const ChartC = ({ symbol, interval }: { symbol: string; interval: string }) => {
+const ChartC = ({ symbol, interval, width, height }: { symbol: string; interval: string; width: number; height: number }) => {
   const [data, setData] = useState<CandlestickData[]>([]);
   const { loading, candleData } = useCandleData({ asset: symbol, interval });
-  const tick = useWsPrices(symbol); 
+  const { tick } = useWsPrices(symbol);
 
   useEffect(() => {
     if (!loading) {
@@ -80,8 +80,8 @@ const ChartC = ({ symbol, interval }: { symbol: string; interval: string }) => {
   return (
     <Chart
       options={{
-        width: 1000,
-        height: 560,
+        width,
+        height,
         layout: { background: { color: "#101820" }, textColor: "#E6E6E6" },
         grid: {
           vertLines: { color: "#2d3e50", style: 1 },

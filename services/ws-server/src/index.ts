@@ -1,5 +1,6 @@
 import { WebSocketServer, WebSocket } from "ws";
 import { CONFIG, redis } from "@exness/shared";
+import { computeBidAsk } from "./lib/computeBidAsk";
 
 const wss = new WebSocketServer({ port: CONFIG.ws.port as number });
 
@@ -23,6 +24,18 @@ wss.on("connection", async (ws: WebSocket) => {
         client.send(message);
       }
     }
+  });
+
+  redis.on("message", (_channel, message) => {
+    for (const client of clients) {
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(message);
+      }
+    }
+    const {symbol, price} = JSON.parse(message);
+
+    const data = computeBidAsk(symbol, price);
+    ws.send(JSON.stringify(data));
   });
 
   ws.on("close", () => {

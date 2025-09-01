@@ -1,6 +1,6 @@
 const COINS = ["BTCUSDT", "ETHUSDT", "SOLUSDT"];
 
-const DropDown = ({
+const SymbolSelector = ({
   value,
   onChange,
 }: {
@@ -13,7 +13,7 @@ const DropDown = ({
         <button
           key={coin}
           onClick={() => onChange(coin)}
-          className={`px-3 py-1 rounded-md text-sm ${
+          className={`px-3 py-1 rounded-md text-sm cursor-pointer ${
             value === coin
               ? "bg-green-600 text-white"
               : "bg-gray-800 text-gray-300 hover:bg-gray-700"
@@ -26,4 +26,4 @@ const DropDown = ({
   );
 };
 
-export default DropDown;
+export default SymbolSelector;
