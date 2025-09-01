@@ -4,5 +4,23 @@
     "apps/*",
     "services/*",
     "packages/*"
-  ]
+  ],
+  
+  "scripts": {
+    "dev": "concurrently -n client,api,ws,poller -c blue,green,yellow,magenta \"bun run dev:client\" \"bun run dev:api\" \"bun run dev:ws\" \"bun run dev:poller\"",
+
+    "dev:client": "cd apps/client && bun dev",
+    "dev:api": "cd apps/api-server && bun run dev",
+    "dev:ws": "cd services/ws-server && bun run dev",
+    "dev:poller": "cd services/price-poller && bun run dev"
+  },
+
+  "dependencies": {
+    "@prisma/client": "^6.15.0",
+    "zod": "^4.1.5"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "prisma": "^6.15.0"
+  }
 }

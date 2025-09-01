@@ -1,6 +1,6 @@
 {
-  "name": "batch-uploader",
-  "module": "index.ts",
+  "name": "@exness/db",
+  "main": "src/index.ts",
   "type": "module",
   "devDependencies": {
     "@types/bun": "latest"
