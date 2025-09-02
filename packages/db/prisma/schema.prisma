@@ -15,6 +15,7 @@ datasource db {
 
 model User {
   id        String   @id @default(cuid())
+  username  String   @unique
   email     String   @unique
   password  String
   orders    Order[]
@@ -39,7 +40,7 @@ model Order {
   openPrice  BigInt
   closePrice BigInt?
   pnl        BigInt?
-  status     OrderStatus @default(open)
+  status     OrderStatus @default(closed)
   createdAt  DateTime  @default(now())
   closedAt   DateTime?
 }

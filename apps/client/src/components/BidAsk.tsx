@@ -1,7 +1,6 @@
 "use client";
 
 import { useWsPrices } from "@/hook/useWsPrices";
-import { SOL, BTC, ETH } from "./icon/icon";
 
 const BidAsk = ({ symbol }: { symbol: string }) => {
   const bidAsks = useWsPrices(symbol);
@@ -34,9 +33,9 @@ const BidAsk = ({ symbol }: { symbol: string }) => {
             className="grid grid-cols-3 gap-4 py-2 border-b border-gray-400 text-sm"
           >
             <div className="flex items-center gap-2">
-              {baseSymbol === "BTC" && <BTC />}
-              {baseSymbol === "ETH" && <ETH />}
-              {baseSymbol === "SOL" && <SOL />}
+              {baseSymbol === "BTC" && <img src="/btc.png" alt="BTC" className="w-6 h-6" />}
+              {baseSymbol === "ETH" && <img src="/eth.png" alt="ETH" className="w-6 h-6" />}
+              {baseSymbol === "SOL" && <img src="/sol.png" alt="SOL" className="w-6 h-6" />}
               <span className="font-medium">{baseSymbol}</span>
             </div>
 

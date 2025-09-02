@@ -1,6 +1,6 @@
 {
   "name": "@exness/db",
-  "main": "src/index.ts",
+  "main": "index.ts",
   "type": "module",
   "devDependencies": {
     "@types/bun": "latest"

@@ -13,7 +13,6 @@ export const useWsPrices = (
     wsRef.current = ws;
 
     ws.onopen = () => {
-      console.log("WS connected");
       ws.send(JSON.stringify({ type: "subscribe", symbol }));
     };
 
